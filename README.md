@@ -2,8 +2,6 @@
 
 这是对[bangbang93](https://github.com/bangbang93)的[OpenBMCLAPI](https://github.com/bangbang93/openbmclapi)的修改版，将默认上线地址修改为了OpenMCIM的地址，以方便上线OpenMCIM
 
-
-
 # OpenMCIM
 基于 BMCLAPI 使用网盘缓存的先例，旨在为中国大陆用户提供稳定的 Mod 信息镜像服务并解决国内下载 Mod 速度缓慢的问题。OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可调用。
 
@@ -56,8 +54,8 @@ run！
 2. Clone 并安装依赖
 
 ```bash
-git clone https://github.com/ZeroWolf/node-openmcim
-cd node-openmcim
+git clone https://github.com/ZeroWolf233/node-openmcim
+cd node-openmcim 
 ## 安装依赖
 npm ci
 ## 编译
@@ -88,6 +86,9 @@ CLUSTER_STORAGE_OPTIONS=存储配置项（请参考上方Alist配置）
 
 
 ## 致谢
-!! bangbang93 !! - https://github.com/bangbang93 (基本全是照着bangbang93的源码改的，总之谢谢93！)
-OpenBMClAPI - https://github.com/bangbang93/openbmclapi
-OpenMCIM - https://github.com/mcmod-info-mirror/mcim
+
+- **bangbang93** - https://github.com/bangbang93 (基本全是照着bangbang93的源码改的，总之谢谢93！)
+- **OpenBMCLAPI** - https://github.com/bangbang93/openbmclapi
+- **OpenMCIM** - https://github.com/mcmod-info-mirror/mcim
+- **SaltWood** - https://github.com/SALTWOOD https://github.com/SaltWood-Studio
+- **Open93@Home-V3** - https://github.com/SaltWood-Studio/Open93AtHome-V3
