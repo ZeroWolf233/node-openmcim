@@ -8,7 +8,7 @@ export class TokenManager {
   private token: string | undefined
   private readonly got: Got
 
-  private readonly prefixUrl = process.env.CLUSTER_BMCLAPI ?? 'https://openbmclapi.bangbang93.com'
+  private readonly prefixUrl = process.env.CLUSTER_BMCLAPI ?? 'https://files.mcimirror.top'
 
   constructor(
     private readonly clusterId: string,
