@@ -13,11 +13,11 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: "openbmclapi-linux.tar.xz"
+            artifact_name: "openmcim-linux.tar.xz"
           - os: windows-latest
-            artifact_name: "openbmclapi-windows.tar.gz"
+            artifact_name: "openmcim-windows.tar.gz"
           - os: macos-latest
-            artifact_name: "openbmclapi-macos.tar.xz"
+            artifact_name: "openmcim-macos.tar.xz"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
