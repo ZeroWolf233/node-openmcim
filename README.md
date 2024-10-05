@@ -88,5 +88,6 @@ CLUSTER_STORAGE_OPTIONS=存储配置项（请参考上方Alist配置）
 
 
 ## 致谢
-OpenBmclAPI - https://github.com/bangbang93/openbmclapi
+!! bangbang93 !! - https://github.com/bangbang93 (基本全是照着bangbang93的源码改的，总之谢谢93！)
+OpenBMClAPI - https://github.com/bangbang93/openbmclapi
 OpenMCIM - https://github.com/mcmod-info-mirror/mcim

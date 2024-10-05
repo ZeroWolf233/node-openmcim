@@ -80,7 +80,7 @@ export class Cluster {
     this.host = config.clusterIp
     this._port = config.port
     this.publicPort = config.clusterPublicPort ?? config.port
-    this.ua = `openbmclapi-cluster/${version}`
+    this.ua = `openmcim-cluster/${version}`
     whiteListDomain.push(this.prefixUrl)
     this.got = got.extend({
       prefixUrl: this.prefixUrl,
@@ -525,7 +525,7 @@ export class Cluster {
         if (res.count === 0) {
           logger.info('没有过期文件')
         } else {
-          logger.info(`文件回收完成，共删除${res.count}个文件，释放空间${prettyBytes(res.size)}`)
+          logger.info(`文件回收完成，共删除${res.count}个文件，释放空间${prettyBytes(res.size)}, that's ♂ good`)
         }
       })
       .catch((e: unknown) => {

@@ -1,8 +1,8 @@
 {
-  "name": "openbmclapi",
-  "version": "1.12.1",
-  "description": "bmclapi@home",
-  "bin": "dist/openbmclapi.js",
+  "name": "openmcim",
+  "version": "1.0.0",
+  "description": "mcim@home",
+  "bin": "dist/openmcim.js",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bangbang93/openbmclapi.git"
+    "url": "git+https://github.com/ZeroWolf233/node-openmcim.git"
   },
-  "author": "bangbang93 <bangbang93@163.com>",
+  "author": "ZeroWolf <z@l0.ink>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bangbang93/openbmclapi/issues"
+    "url": "https://github.com/ZeroWolf233/node-openmcim/issues"
   },
-  "homepage": "https://github.com/bangbang93/openbmclapi#readme",
+  "homepage": "https://github.com/ZeroWolf233/node-openmcim#readme",
   "dependencies": {
     "@bangbang93/service-errors": "^1.1.1",
     "@bangbang93/utils": "^6.9.1",
