@@ -1,9 +1,13 @@
-# Node-OpenMCIM
+# Node-OpemMCIM
 
-这是对[bangbang93](https://github.com/bangbang93)的[OpenBMCLAPI](https://github.com/bangbang93/openbmclapi)的修改版，将默认上线地址修改为了OpenMCIM的地址，以方便上线OpenMCIM
+这是对 [bangbang93](https://github.com/bangbang93) 的 [OpenBMCLAPI](https://github.com/bangbang93/openbmclapi) 项目的修改版
 
-# OpenMCIM
-基于 BMCLAPI 使用网盘缓存的先例，旨在为中国大陆用户提供稳定的 Mod 信息镜像服务并解决国内下载 Mod 速度缓慢的问题。OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可调用。
+为了方便上线 OpenMCIM 而修改了部分内容
+
+# 关于OpenMCIM
+借鉴 OpenBMCLAPI 使用网盘缓存的先例，旨在为中国大陆用户提供稳定的 Mod 信息镜像服务并解决国内下载 Mod 速度缓慢的问题。
+
+OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可调用。
 
 ## 配置
 
@@ -31,6 +35,27 @@ CLUSTER_STORAGE=alist
 CLUSTER_STORAGE_OPTIONS={"url":"http://127.0.0.1:5244/dav","basePath":"wopan/mcim","username":"admin","password":"admin" }
 ```
 按照需要修改
+
+### 温馨提示
+
+如从 Go 端迁移至 Node 端，你Alist里面的目录应该是这样的：
+
+```file_tree
+example/
+├── download/
+│   ├── 00/
+│   ├── 01/
+|   ├── 03/
+│   └── xx(下面一堆文件夹,不一一列举)/
+├── measure/
+│   ├── 1
+│   ├── 2
+│   └── 3
+```
+此时你basepath的地址就应该填写"download"
+
+（即确保 Node-OpenMCIM 程序读取的根目录为有效文件所存储目录）
+
 
 ### 安装包
 
