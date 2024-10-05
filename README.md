@@ -1,4 +1,4 @@
-# Node-OpemMCIM
+# Node-OpenMCIM
 
 这是对 [bangbang93](https://github.com/bangbang93) 的 [OpenBMCLAPI](https://github.com/bangbang93/openbmclapi) 项目的修改版
 
