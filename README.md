@@ -32,7 +32,8 @@ OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可
 在.env中加上
 ```env
 CLUSTER_STORAGE=alist
-CLUSTER_STORAGE_OPTIONS={"url":"http://127.0.0.1:5244/dav","basePath":"wopan/mcim","username":"admin","password":"admin" }
+CLUSTER_STORAGE_OPTIONS={"url":"http://127.0.0.1:5244/dav","basePath":"mcim","username":"admin","password":"admin" }
+#                                      ↑AList地址(别忘了加/dav)          ↑文件路径         ↑账号(有webdav权限)  ↑密码
 ```
 按照需要修改
 
