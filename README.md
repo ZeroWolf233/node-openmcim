@@ -42,7 +42,7 @@ CLUSTER_STORAGE_OPTIONS={"url":"http://127.0.0.1:5244/dav","basePath":"mcim","us
 如从 Go 端迁移至 Node 端，你Alist里面的目录应该是这样的：
 
 ```file_tree
-example/
+mcim/
 ├── download/
 │   ├── 00/
 │   ├── 01/
@@ -53,7 +53,7 @@ example/
 │   ├── 2
 │   └── 3
 ```
-此时你basepath的地址就应该填写"download"
+此时你basepath的地址就应该填写"mcim/download"
 
 （即确保 Node-OpenMCIM 程序读取的根目录为有效文件所存储目录）
 
