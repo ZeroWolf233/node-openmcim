@@ -1,4 +1,4 @@
-# Node-OpemMCIM
+# Node-OpenMCIM
 
 这是对[bangbang93](https://github.com/bangbang93)的[OpenBMCLAPI](https://github.com/bangbang93/openbmclapi)的修改版，将默认上线地址修改为了OpenMCIM的地址，以方便上线OpenMCIM
 
