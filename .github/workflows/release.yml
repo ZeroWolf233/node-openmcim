@@ -62,9 +62,9 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: ${{ contains(github.ref, '-') }}
           files: |
-              openbmclapi-linux.tar.xz
-              openbmclapi-windows.tar.gz
-              openbmclapi-macos.tar.xz
+              openmcim-linux.tar.xz
+              openmcim-windows.tar.gz
+              openmcim-macos.tar.xz
 
 
 
