@@ -66,6 +66,21 @@ mcim/
 
 run！
 
+### 使用Docker
+
+```bash
+docker run -d \
+-e CLUSTER_ID=${CLUSTER_ID} \
+-e CLUSTER_SECRET=${CLUSTER_SECRET} \
+-e CLUSTER_PUBLIC_PORT=${CLUSTER_PORT} \
+-e TZ=Asia/Shanghai \
+-v /data/openmcim:/opt/openmcim/cache \
+-p ${CLUSTER_PORT}:4000 \
+--restart always \
+--name openmcim \
+pysio/openmcim
+```
+
 ### 从源码安装
 
 #### 环境
