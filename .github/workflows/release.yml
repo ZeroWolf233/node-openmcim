@@ -15,7 +15,7 @@ jobs:
           - os: ubuntu-latest
             artifact_name: "openmcim-linux.zip"
           - os: windows-latest
-            artifact_name: "openmcim-windows.7z"
+            artifact_name: "openmcim-windows.zip"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
           prerelease: ${{ contains(github.ref, '-') }}
           files: |
               openmcim-linux.zip
-              openmcim-windows.7z
+              openmcim-windows.zip
 
 
 
