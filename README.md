@@ -75,10 +75,10 @@ docker run -d \
 -e CLUSTER_PUBLIC_PORT=${CLUSTER_PORT} \
 -e TZ=Asia/Shanghai \
 -v /data/openmcim:/opt/openmcim/cache \
--p ${CLUSTER_PORT}:4000 \
---restart always \
---name openmcim \
-pysio/openmcim
+-p ${CLUSTER_PORT}:${CLUSTER_PORT} \
+--restart unless-stop \
+--name mcim \
+zerowolf233/mcim
 ```
 
 ### 从源码安装
