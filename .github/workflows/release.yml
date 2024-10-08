@@ -3,7 +3,7 @@ name: "Release Binary"
 on:
   push:
     tags:
-      - "v*"
+      - "*"
 
 jobs:
   build-tar-ball:
@@ -13,9 +13,9 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: "openmcim-linux.tar.xz"
+            artifact_name: "openmcim-linux.zip"
           - os: windows-latest
-            artifact_name: "openmcim-windows.tar.gz"
+            artifact_name: "openmcim-windows.7z"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -60,8 +60,8 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: ${{ contains(github.ref, '-') }}
           files: |
-              openmcim-linux.tar.xz
-              openmcim-windows.tar.gz
+              openmcim-linux.zip
+              openmcim-windows.7z
 
 
 
