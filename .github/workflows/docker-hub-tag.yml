@@ -1,9 +1,6 @@
 name: Tag Docker Image CI
 
-on:
-  push:
-    tags:
-      - v*
+on: push
 
 jobs:
   build:
