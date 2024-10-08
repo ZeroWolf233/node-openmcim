@@ -23,8 +23,8 @@ OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可
 | DISABLE_ACCESS_LOG  | 否  | false        | 禁用访问日志输出                                                                                               |
 | ENABLE_UPNP         | 否  | false        | 启用 UPNP 端口映射                                                                                           |
 | CLUSTER_BMCLAPI     | 否  | https://files.mcimirror.top        | 更改上线地址(测试变量)            |
-| CLUSTER_STORAGE     | 否  | files        | 使用其他存储源的类型            |
-| CLUSTER_STORAGE_OPTIONS | 否  | 无        | 挂载其他存储源的配置项（请勿自行填写）            |
+| CLUSTER_STORAGE     | 否  | files        | 使用其他存储源的类型(默认为本地)            |
+| CLUSTER_STORAGE_OPTIONS | 否  | 无        | 挂载其他存储源的配置项            |
 
 如果你在源码中发现了其他环境变量, 那么它们是为了方便开发而存在的, 可能会随时修改, 不要在生产环境中使用！
 
