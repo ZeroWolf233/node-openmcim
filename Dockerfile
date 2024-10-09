@@ -1,7 +1,7 @@
 ARG BASE_IMAGE=node:20-bullseye-slim
 FROM $BASE_IMAGE AS install
 
-WORKDIR /opt/openbmclapi
+WORKDIR /opt/mcim
 RUN apt update && \
     apt install -y build-essential python3
 COPY package-lock.json package.json tsconfig.json ./
@@ -10,7 +10,7 @@ COPY src ./src
 RUN npm run build
 
 FROM $BASE_IMAGE AS modules
-WORKDIR /opt/openbmclapi
+WORKDIR /opt/mcim
 
 RUN apt update && \
     apt install -y build-essential python3
@@ -29,14 +29,14 @@ RUN chown -R $USER /var/log/nginx /var/lib/nginx
 
 USER $USER
 
-WORKDIR /opt/openbmclapi
-COPY --from=modules /opt/openbmclapi/node_modules ./node_modules
-COPY --from=install /opt/openbmclapi/dist ./dist
-COPY nginx/ /opt/openbmclapi/nginx
+WORKDIR /opt/mcim
+COPY --from=modules /opt/mcim/node_modules ./node_modules
+COPY --from=install /opt/mcim/dist ./dist
+COPY nginx/ /opt/mcim/nginx
 COPY package.json ./
 
 
 ENV CLUSTER_PORT=4000
 EXPOSE $CLUSTER_PORT
-VOLUME /opt/openbmclapi/cache
+VOLUME /opt/mcim/cache
 CMD ["tini", "--", "node", "--enable-source-maps", "dist/index.js"]
