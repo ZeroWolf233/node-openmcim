@@ -62,11 +62,25 @@ mcim/
 
 ### 安装包
 
-从 [Github Release](https://github.com/ZeroWolf233/node-openmcim/releases) 中选择对应你的系统的最新版本
+从 [Github Release](https://github.com/ZeroWolf233/node-openmcim/releases) 中下载最新版本
 
-根据对应信息，参照上方表格填写.env文件
+解压，然后根据对应信息，参照上方表格填写.env文件
 
-run！
+启动你系统对应的脚本
+
+```bash
+bash launch_linux.sh
+```
+
+```bat
+start launch_windows.sh
+```
+
+```bash
+bash launch_macos.sh
+```
+
+即可开始运行
 
 ### 使用Docker
 
