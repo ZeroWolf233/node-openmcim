@@ -152,5 +152,5 @@ SKIP_FILE_SHA_CHECK=true或false（参考上方ENV配置项）
 - **OpenMCIM** - https://github.com/mcmod-info-mirror/mcim
 - **SaltWood** - https://github.com/SALTWOOD https://github.com/SaltWood-Studio
 - **Open93@Home-V3** - https://github.com/SaltWood-Studio/Open93AtHome-V3
-- **ZeroWolf233** - https://github.com/ZeroWolf233/node-openmcim 项目发起 & 程序改写
+- **ZeroWolf233** - https://github.com/ZeroWolf233 项目发起 & 程序改写
 - **Zhang** - https://github.com/Zhang12334 项目发起 & 程序改写
