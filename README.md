@@ -9,6 +9,8 @@
 
 OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可调用。
 
+[OpenMCIM 文件分发相关](https://github.com/mcmod-info-mirror/mcim/issues/91)
+
 ## 配置
 
 | 环境变量             |必填 | 默认值        | 说明                                                                                                     |
