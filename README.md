@@ -25,8 +25,10 @@ OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可
 | CLUSTER_BMCLAPI     | 否  | https://files.mcimirror.top        | 更改上线地址(测试变量)            |
 | CLUSTER_STORAGE     | 否  | files        | 使用其他存储源的类型(默认为本地)            |
 | CLUSTER_STORAGE_OPTIONS | 否  | 无        | 挂载其他存储源的配置项            |
+| SKIP_FILE_SHA_CHECK | 否  | false          | 防止主控SHA爆炸，强制忽略SHA问题上线 |
+| SKIP_SYNC | 否  | false          | 测试用，跳过同步 |
 
-如果你在源码中发现了其他环境变量, 那么它们是为了方便开发而存在的, 可能会随时修改, 不要在生产环境中使用！
+### 如果你在源码中发现了其他环境变量, 那么它们是为了方便开发而存在的, 可能会随时修改, 不要在生产环境中使用！
 
 ## Alist使用方法
 在.env中加上
@@ -120,6 +122,7 @@ CLUSTER_PUBLIC_PORT=你的对外开放端口（用户请求时访问）
 CLUSTER_PORT=你的本地开放端口
 CLUSTER_STORAGE=存储类型
 CLUSTER_STORAGE_OPTIONS=存储配置项（请参考上方Alist配置）
+SKIP_FILE_SHA_CHECK=true或false（参考上方ENV配置项）
 ```
 
 如果配置无误的话, 运行程序, 就会开始拉取文件, 拉取完成后就会开始等待服务器分发请求了！
@@ -133,3 +136,5 @@ CLUSTER_STORAGE_OPTIONS=存储配置项（请参考上方Alist配置）
 - **OpenMCIM** - https://github.com/mcmod-info-mirror/mcim
 - **SaltWood** - https://github.com/SALTWOOD https://github.com/SaltWood-Studio
 - **Open93@Home-V3** - https://github.com/SaltWood-Studio/Open93AtHome-V3
+- **ZeroWolf233** - https://github.com/ZeroWolf233/node-openmcim 项目发起 & 程序改写
+- **Zhang** - https://github.com/Zhang12334 项目发起 & 程序改写
