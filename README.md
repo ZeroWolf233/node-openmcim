@@ -92,7 +92,7 @@ docker run -d \
 -e CLUSTER_SECRET=${CLUSTER_SECRET} \
 -e CLUSTER_PUBLIC_PORT=${CLUSTER_PORT} \
 -e TZ=Asia/Shanghai \
--v /data/openmcim:/opt/openmcim/cache \
+-v /data/mcim:/opt/mcim \
 -p ${CLUSTER_PORT}:${CLUSTER_PORT} \
 --restart unless-stop \
 --name mcim \
