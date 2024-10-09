@@ -18,7 +18,9 @@ export async function bootstrap(version: string): Promise<void> {
   logger.info(colors.green(`正在启动 OpenMCIM ${version}`))
   const tokenManager = new TokenManager(config.clusterId, config.clusterSecret, version)
   await tokenManager.getToken()
-  const cluster = new Cluster(config.clusterSecret, version, tokenManager)
+  const skipsync = config.skipsync ?? false;// 获取跳过同步布尔值，默认false
+  const skipfileshacheck = config.skipfileshacheck ?? false;// 获取跳过文件校验布尔值，默认false
+  const cluster = new Cluster(config.clusterSecret, version, tokenManager, skipfileshacheck, skipsync)
   await cluster.init()
 
   const storageReady = await cluster.storage.check()
