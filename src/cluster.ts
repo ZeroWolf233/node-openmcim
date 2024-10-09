@@ -76,6 +76,8 @@ export class Cluster {
     private readonly clusterSecret: string,
     private readonly version: string,
     private readonly tokenManager: TokenManager,
+    private readonly skipfileshacheck: boolean,
+    private readonly skipsync: boolean,
   ) {
     this.host = config.clusterIp
     this._port = config.port
@@ -174,6 +176,10 @@ export class Cluster {
     if (missingFiles.length === 0) {
       return
     }
+    if (this.skipsync) {
+      logger.info('已跳过文件同步')
+      return
+    }
     logger.info(`mismatch ${missingFiles.length} files, start syncing`)
     logger.info(syncConfig, '同步策略')
     const multibar = new MultiBar({
@@ -203,8 +209,14 @@ export class Cluster {
                 })
 
               const isFileCorrect = validateFile(res.body, file.hash)
-              if (!isFileCorrect) {
-                throw new RequestError(`文件${file.path}校验失败`, new Error(`文件${file.path}校验失败`), res.request)
+
+              if(this.skipfileshacheck){
+                logger.info('已跳过文件校验')
+              }
+              else{
+                if (!isFileCorrect) {
+                  throw new RequestError(`文件${file.path}校验失败`, new Error(`文件${file.path}校验失败`), res.request)
+                }
               }
               await this.storage.writeFile(hashToFilename(file.hash), res.body, file)
             },
@@ -265,10 +277,15 @@ export class Cluster {
       },
     )
     multibar.stop()
-    if (hasError) {
-      throw new Error('同步失败')
-    } else {
-      logger.info('同步完成')
+    if (this.skipfileshacheck) {//true情况，跳过校验
+      logger.info('已跳过文件校验，同步完成')
+    }
+    else {
+      if (hasError) {
+        throw new Error('同步失败')
+      } else {
+        logger.info('同步完成')
+      }
     }
   }
 
