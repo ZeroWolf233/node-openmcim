@@ -133,10 +133,10 @@ SKIP_FILE_SHA_CHECK=true或false（参考上方ENV配置项）
 
 ## 致谢
 
-- **bangbang93** - https://github.com/bangbang93 (基本全是照着bangbang93的源码改的，总之谢谢93！)
-- **OpenBMCLAPI** - https://github.com/bangbang93/openbmclapi
-- **OpenMCIM** - https://github.com/mcmod-info-mirror/mcim
-- **SaltWood** - https://github.com/SALTWOOD https://github.com/SaltWood-Studio
-- **Open93@Home-V3** - https://github.com/SaltWood-Studio/Open93AtHome-V3
-- **ZeroWolf233** - https://github.com/ZeroWolf233 项目发起 & 程序改写
-- **Zhang** - https://github.com/Zhang12334 项目发起 & 程序改写
+- [**bangbang93**](https://github.com/bangbang93) 基本全是照着bangbang93的源码改的，总之谢谢93！
+- [**OpenBMCLAPI**](https://github.com/bangbang93/openbmclapi) 项目原型
+- [**OpenMCIM**](https://github.com/mcmod-info-mirror/mcim) 大陆Curseforge&Modrinth镜像源
+- [**SaltWood**](https://github.com/SALTWOOD) OpenMCIM所用主控
+- [**Open93@Home-V3**](https://github.com/SaltWood-Studio/Open93AtHome-V3)
+- [**ZeroWolf233**](https://github.com/ZeroWolf233) 作者，但是fw一个
+- [**Zhang**](https://github.com/Zhang12334) 项目发起 & 程序改写
