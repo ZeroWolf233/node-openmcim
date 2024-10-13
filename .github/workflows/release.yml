@@ -15,7 +15,7 @@ jobs:
           - os: ubuntu-latest
             artifact_name: "openmcim-linux.zip"
           - os: windows-latest
-            artifact_name: "openmcim-windows.zip"
+            artifact_name: "openmcim-windows.7z"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +29,7 @@ jobs:
       - run: |
           cp $(which node) .
           cp platforms/linux/run.sh .
-          tar -caf ${{ matrix.artifact_name }} dist nginx package.json node_modules node run.sh
+          zip -caf ${{ matrix.artifact_name }} dist nginx package.json node_modules node run.sh
         if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
 
       ## windows
@@ -37,7 +37,7 @@ jobs:
           $SRC = (Get-Command node.exe).Path
           copy $SRC node.exe
           copy platforms/windows/run.ps1 .
-          tar -caf ${{ matrix.artifact_name }} dist package.json node_modules node.exe run.ps1
+          7z -caf ${{ matrix.artifact_name }} dist package.json node_modules node.exe run.ps1
         if: matrix.os == 'windows-latest'
 
       - name: "Upload Artifact"
@@ -61,7 +61,7 @@ jobs:
           prerelease: ${{ contains(github.ref, '-') }}
           files: |
               openmcim-linux.zip
-              openmcim-windows.zip
+              openmcim-windows.7z
 
 
 
