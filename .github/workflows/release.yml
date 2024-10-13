@@ -1,4 +1,4 @@
-name: "Release Binary"
+name: "发Release"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-tar-ball:
-    name: "Build and Tar Ball"
+    name: "编译打包"
     strategy:
       fail-fast: false
       matrix:
@@ -48,7 +48,7 @@ jobs:
 
   create-release:
     runs-on: "ubuntu-latest"
-    name: "Create Release"
+    name: "发布！"
     needs: "build-tar-ball"
     steps:
       - uses: actions/checkout@v4
