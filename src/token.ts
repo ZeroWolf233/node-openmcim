@@ -18,7 +18,7 @@ export class TokenManager {
     this.got = got.extend({
       prefixUrl: this.prefixUrl,
       headers: {
-        'user-agent': `openbmclapi-cluster/${version}`,
+        'user-agent': `openmcim-cluster/${version}`,
       },
       timeout: {
         request: ms('5m'),
