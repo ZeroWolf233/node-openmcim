@@ -211,12 +211,9 @@ export class Cluster {
               const isFileCorrect = validateFile(res.body, file.hash)
 
               if(this.skipfileshacheck){
-                logger.info('已跳过文件校验')
-              }
-              else{
                 if (!isFileCorrect) {
                   throw new RequestError(`文件${file.path}校验失败`, new Error(`文件${file.path}校验失败`), res.request)
-                }
+              }
               }
               await this.storage.writeFile(hashToFilename(file.hash), res.body, file)
             },
