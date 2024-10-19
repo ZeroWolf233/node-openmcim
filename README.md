@@ -89,7 +89,7 @@ zerowolf233/mcim
 
 #### 环境
 
-- Node.js 18 以上
+- Node.js 20 以上
 - Windows/MacOS/Linux
 - x86/arm 均可 (需支持Nodejs)
 
