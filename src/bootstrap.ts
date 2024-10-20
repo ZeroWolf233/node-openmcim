@@ -35,7 +35,7 @@ export async function bootstrap(version: string): Promise<void> {
     await cluster.syncFiles(files, configuration.sync)
   } catch (e) {
     if (e instanceof HTTPError) {
-      logger.error({url: e.response.url}, 'download error')
+      logger.error({url: e.response.url}, '下载错误')
     }
     throw e
   }
@@ -62,28 +62,28 @@ export async function bootstrap(version: string): Promise<void> {
     await cluster.listen()
     await cluster.enable()
 
-    logger.info(colors.rainbow(`done, serving ${files.files.length} files`))
+    logger.info(colors.rainbow(`完成, 正在提供 ${files.files.length} 个文件`))
     if (nodeCluster.isWorker && typeof process.send === 'function') {
       process.send('ready')
     }
 
     checkFileInterval = setTimeout(() => {
       void checkFile(files).catch((e) => {
-        console.error('check file error')
+        console.error('检查文件错误')
         console.error(e)
       })
     }, ms('10m'))
   } catch (e) {
     logger.fatal(e)
     if (process.env.NODE_ENV === 'development') {
-      logger.fatal('development mode, not exiting')
+      logger.fatal('开发模式，不退出')
     } else {
       cluster.exit(1)
     }
   }
 
   async function checkFile(lastFileList: IFileList): Promise<void> {
-    logger.debug('refresh files')
+    logger.debug('刷新文件')
     try {
       const lastModified = max(lastFileList.files.map((file) => file.mtime))
       const fileList = await cluster.getFileList(lastModified)
@@ -97,7 +97,7 @@ export async function bootstrap(version: string): Promise<void> {
     } finally {
       checkFileInterval = setTimeout(() => {
         checkFile(lastFileList).catch((e) => {
-          console.error('check file error')
+          console.error('检查文件错误')
           console.error(e)
         })
       }, ms('10m'))
@@ -106,7 +106,7 @@ export async function bootstrap(version: string): Promise<void> {
 
   let stopping = false
   const onStop = async (signal: string): Promise<void> => {
-    console.log(`got ${signal}, unregistering cluster`)
+    console.log(`搞到 ${signal}, 正在注销集群`)
     if (stopping) {
       // eslint-disable-next-line n/no-process-exit
       process.exit(1)
@@ -120,7 +120,7 @@ export async function bootstrap(version: string): Promise<void> {
     await cluster.disable()
 
     // eslint-disable-next-line no-console
-    console.log('unregister success, waiting for background task, ctrl+c again to force kill')
+    console.log('注销成功，等待后台任务，crtl+c以强制退出')
     server.close()
     cluster.nginxProcess?.kill()
   }

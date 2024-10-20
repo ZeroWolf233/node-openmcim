@@ -76,7 +76,7 @@ export class Keepalive {
 
     if (err) throw new Error('keep alive error', {cause: err})
     const bytes = prettyBytes(counters.bytes, {binary: true})
-    logger.info(`keep alive success, serve ${counters.hits} files, ${bytes}`)
+    logger.info(`保活成功，上传了 ${counters.hits} 个文件，总共${bytes}`)
     this.cluster.counters.hits -= counters.hits
     this.cluster.counters.bytes -= counters.bytes
     return !!date
@@ -90,7 +90,7 @@ export class Keepalive {
     })
       .timeout(ms('10m'), 'restart timeout')
       .catch((e) => {
-        logger.error(e, 'restart failed')
+        logger.error(e, '重启失败')
         this.cluster.exit(1)
       })
   }

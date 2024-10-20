@@ -180,7 +180,7 @@ export class Cluster {
     if (missingFiles.length === 0) {
       return
     }
-    logger.info(`mismatch ${missingFiles.length} files, start syncing`)
+    logger.info(`缺少 ${missingFiles.length} 个文件，开始同步`)
     logger.info(syncConfig, '同步策略')
     const multibar = new MultiBar({
       format: ' {bar} | {filename} | {value}/{total}',
@@ -431,7 +431,7 @@ export class Cluster {
             cb({token})
           })
           .catch((e) => {
-            logger.error(e, 'get token error')
+            logger.error(e, '获取token失败')
             this.exit(1)
           })
       },
@@ -441,7 +441,7 @@ export class Cluster {
       logger.info(msg)
     })
     this.socket.on('connect', () => {
-      logger.debug('connected')
+      logger.debug('断开连接')
     })
     this.socket.on('disconnect', (reason) => {
       logger.warn(`与服务器断开连接: ${reason}`)
@@ -466,14 +466,14 @@ export class Cluster {
       }
     })
     io.on('reconnect_error', (err) => {
-      logger.error(err, 'reconnect_error')
+      logger.error(err, '重连失败')
     })
     io.on('reconnect_failed', this.onConnectionError.bind(this, 'reconnect_failed', new Error('reconnect failed')))
   }
 
   public async enable(): Promise<void> {
     if (this.isEnabled) return
-    logger.trace('enable')
+    logger.trace('启用')
     await this._enable()
     this.isEnabled = true
     this.wantEnable = true
@@ -543,7 +543,7 @@ export class Cluster {
         }
       })
       .catch((e: unknown) => {
-        logger.error({err: e}, 'gc error')
+        logger.error({err: e}, 'gc错误')
       })
   }
 
@@ -578,12 +578,12 @@ export class Cluster {
       throw new Error('节点注册失败')
     }
 
-    logger.info(colors.rainbow('start doing my job'))
+    logger.info(colors.rainbow('开始干活'))
     this.keepalive.start(this.socket)
   }
 
   private onConnectionError(event: string, err: Error): void {
-    console.error(`${event}: cannot connect to server`, err)
+    console.error(`${event}: 无法连接至主控`, err)
     if (this.server) {
       this.server.close(() => {
         this.exit(1)

@@ -77,7 +77,7 @@ export class TokenManager {
         },
       })
       .json<{token: string; ttl: number}>()
-    logger.debug('success fresh token')
+    logger.debug('成功搞到token')
     this.scheduleRefreshToken(token.ttl)
     this.token = token.token
   }
