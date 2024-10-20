@@ -171,13 +171,13 @@ export class Cluster {
     if (!storageReady) {
       throw new Error('存储异常')
     }
-    logger.info('正在检查缺失文件')
-    const missingFiles = await this.storage.getMissingFiles(fileList.files)
-    if (missingFiles.length === 0) {
-      return
-    }
     if (this.skipsync) {
       logger.info('已跳过文件同步')
+      return
+    }
+      logger.info('正在检查缺失文件')
+    const missingFiles = await this.storage.getMissingFiles(fileList.files)
+    if (missingFiles.length === 0) {
       return
     }
     logger.info(`mismatch ${missingFiles.length} files, start syncing`)
