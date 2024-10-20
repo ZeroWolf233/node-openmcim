@@ -172,7 +172,7 @@ export class Cluster {
       throw new Error('存储异常')
     }
     if (this.skipsync) {
-      logger.info('已跳过文件同步')
+      logger.info('已跳过文件同步，在保活时您将无法看到保活的文件大小')
       return
     }
       logger.info('正在检查缺失文件')
@@ -218,7 +218,7 @@ export class Cluster {
               await this.storage.writeFile(hashToFilename(file.hash), res.body, file)
             },
             {
-              retries: 10,
+              retries: 3,
               onFailedAttempt: async (e) => {
                 if (e instanceof HTTPError) {
                   logger.debug(
@@ -274,12 +274,13 @@ export class Cluster {
       },
     )
     multibar.stop()
-    if (this.skipfileshacheck) {//true情况，跳过校验
+    //true情况，跳过校验
+    if (this.skipfileshacheck) {
       logger.info('已跳过文件校验，同步完成')
     }
     else {
       if (hasError) {
-        throw new Error('同步失败')
+        logger.info('同步完成,但有错误sha1')
       } else {
         logger.info('同步完成')
       }

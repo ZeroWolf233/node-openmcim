@@ -45,7 +45,7 @@ export class Keepalive {
         milliseconds: ms('10s'),
       })
       if (!status) {
-        logger.fatal('kicked by server')
+        logger.fatal('被主控踹哩(大悲')
         return await this.restart()
       }
       this.keepAliveError = 0
@@ -76,7 +76,11 @@ export class Keepalive {
 
     if (err) throw new Error('keep alive error', {cause: err})
     const bytes = prettyBytes(counters.bytes, {binary: true})
+    if (process.env.SKIP_SYNC) {     
+    logger.info(`保活成功，上传了 ${counters.hits} 个文件`)
+    } else {
     logger.info(`保活成功，上传了 ${counters.hits} 个文件，总共${bytes}`)
+    }
     this.cluster.counters.hits -= counters.hits
     this.cluster.counters.bytes -= counters.bytes
     return !!date
