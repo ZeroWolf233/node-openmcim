@@ -29,7 +29,7 @@ let backoff = 1
 function forkWorker(): void {
   const worker = cluster.fork()
   worker.on('exit', (code, signal) => {
-    console.log(`第 ${worker.id} 次爆炸！，错误码: ${code}, signal: ${signal}，${backoff}秒后重启`)
+    console.log(`第 ${worker.id} 次爆炸！错误码: ${code}, signal: ${signal}，${backoff}秒后重启`)
     // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     setTimeout(() => forkWorker(), backoff * 1000)
     backoff = Math.min(backoff * BACKOFF_FACTOR, 60)
