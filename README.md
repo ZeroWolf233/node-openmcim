@@ -28,8 +28,7 @@ OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可
 | CLUSTER_STORAGE     | 否  | files        | 使用其他存储源的类型(默认为本地)            |
 | CLUSTER_STORAGE_OPTIONS | 否  | 无        | 挂载其他存储源的配置项            |
 | SKIP_FILE_SHA_CHECK | 否  | false          | 防止主控SHA爆炸，强制忽略SHA问题上线 |
-| SKIP_SYNC | 否  | false          | 智能跳过同步(由 **千时雨** 提供) |
-| FORCE_SKIP_SYNC | 否  | false          | 强制跳过所有同步(不推荐) |
+| SKIP_SYNC | 否  | false          | 强制跳过所有同步(不推荐) |
 | SKIP_GC | 否  | false          | 跳过GC垃圾自动回收(由 **千时雨** 提供) |
 | THREADS | 否  | 由主控分配         | 同步线程(改太高会被banban) |
 
