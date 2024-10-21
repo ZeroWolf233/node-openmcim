@@ -63,8 +63,8 @@ export class WebdavStorage implements IStorage {
       await this.client.putFileContents(join(this.basePath, '.check'), Buffer.from(Date.now().toString()))
       return true
     } catch (e) {
-        logger.error(e, '存储检查异常')
-        return false
+      logger.error(e, '存储检查异常')
+      return false
     } finally {
       try {
         await this.client.deleteFile(join(this.basePath, '.check'))
