@@ -168,13 +168,9 @@ export class Cluster {
   public async syncFiles(fileList: IFileList, syncConfig: OpenbmclapiAgentConfiguration['sync']): Promise<void> {
     const storageReady = await this.storage.check()
     if (!storageReady) {
-      if (process.env.SKIP_SYNC) {
-        logger.info('存储异常，已跳过存储检查')
-      }else{
       throw new Error('存储异常')
-      }
     }
-    if (process.env.FORCE_SKIP_SYNC) {
+    if (process.env.SKIP_SYNC) {
       logger.info('已强制跳过文件同步，在保活时您将无法看到保活的文件大小')
       return
     }
