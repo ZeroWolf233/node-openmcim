@@ -11,7 +11,7 @@ OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可
 
 [OpenMCIM 文件分发相关](https://github.com/mcmod-info-mirror/mcim/issues/91)
 
-## 配置
+## 变量
 
 | 环境变量             |必填 | 默认值        | 说明                                                                                                     |
 |---------------------|-----|--------------|--------------------------------------------------------------------------------------------------------|
@@ -28,7 +28,10 @@ OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可
 | CLUSTER_STORAGE     | 否  | files        | 使用其他存储源的类型(默认为本地)            |
 | CLUSTER_STORAGE_OPTIONS | 否  | 无        | 挂载其他存储源的配置项            |
 | SKIP_FILE_SHA_CHECK | 否  | false          | 防止主控SHA爆炸，强制忽略SHA问题上线 |
-| SKIP_SYNC | 否  | false          | 测试用，跳过同步 |
+| SKIP_SYNC | 否  | false          | 智能跳过同步(由 **千时雨** 提供) |
+| FORCE_SKIP_SYNC | 否  | false          | 强制跳过所有同步(不推荐) |
+| SKIP_GC | 否  | false          | 跳过GC垃圾自动回收(由 **千时雨** 提供) |
+| THREADS | 否  | 由主控分配         | 同步线程(改太高会被banban) |
 
 ### 如果你在源码中发现了其他环境变量, 那么它们是为了方便开发而存在的, 可能会随时修改, 不要在生产环境中使用！
 
@@ -120,16 +123,11 @@ node dist/index.js
 ```env
 CLUSTER_ID=你的节点ID
 CLUSTER_SECRET=你的节点密钥
-CLUSTER_PUBLIC_PORT=你的对外开放端口（用户请求时访问）
-CLUSTER_PORT=你的本地开放端口
-CLUSTER_STORAGE=存储类型
-CLUSTER_STORAGE_OPTIONS=存储配置项（请参考上方Alist配置）
-SKIP_FILE_SHA_CHECK=true或false（参考上方ENV配置项）
+CLUSTER_PORT=你的开放端口
+# 更多变量请看上方变量的详细解释
 ```
 
 如果配置无误的话, 运行程序, 就会开始拉取文件, 拉取完成后就会开始等待服务器分发请求了！
-
-
 
 ## 致谢
 

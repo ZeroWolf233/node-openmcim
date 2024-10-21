@@ -77,7 +77,6 @@ export class Cluster {
     private readonly version: string,
     private readonly tokenManager: TokenManager,
     private readonly skipfileshacheck: boolean,
-    private readonly skipsync: boolean,
   ) {
     this.host = config.clusterIp
     this._port = config.port
@@ -169,13 +168,17 @@ export class Cluster {
   public async syncFiles(fileList: IFileList, syncConfig: OpenbmclapiAgentConfiguration['sync']): Promise<void> {
     const storageReady = await this.storage.check()
     if (!storageReady) {
+      if (process.env.SKIP_SYNC) {
+        logger.info('存储异常，已跳过存储检查')
+      }else{
       throw new Error('存储异常')
+      }
     }
-    if (this.skipsync) {
-      logger.info('已跳过文件同步，在保活时您将无法看到保活的文件大小')
+    if (process.env.FORCE_SKIP_SYNC) {
+      logger.info('已强制跳过文件同步，在保活时您将无法看到保活的文件大小')
       return
     }
-      logger.info('正在检查缺失文件')
+    logger.info('正在检查缺失文件')
     const missingFiles = await this.storage.getMissingFiles(fileList.files)
     if (missingFiles.length === 0) {
       return
@@ -188,7 +191,8 @@ export class Cluster {
       notTTYSchedule: ms('10s'),
     })
     const totalBar = multibar.create(missingFiles.length, 0, {filename: '总文件数'})
-    const parallel = syncConfig.concurrency
+    const parallel = Number(process.env.THREADS) ?? syncConfig.concurrency
+    logger.info('您当前的下载线程:' + {parallel})
     let hasError = false
     await pMap(
       missingFiles,
@@ -534,18 +538,23 @@ export class Cluster {
   }
 
   public gcBackground(files: IFileList): void {
-    this.storage
-      .gc(files.files)
-      .then((res) => {
-        if (res.count === 0) {
-          logger.info('没有过期文件')
-        } else {
-          logger.info(`文件回收完成，共删除${res.count}个文件，释放空间${prettyBytes(res.size)}, that's ♂ good`)
-        }
-      })
-      .catch((e: unknown) => {
-        logger.error({err: e}, 'gc错误')
-      })
+    if (process.env.SKIP_GC) {
+      logger.info('已跳过文件回收(谨防硬盘挤爆)');
+      return;
+    }else{
+      this.storage
+        .gc(files.files)
+        .then((res) => {
+          if (res.count === 0) {
+            logger.info('没有过期文件')
+          } else {
+            logger.info(`文件回收完成，共删除${res.count}个文件，释放空间${prettyBytes(res.size)}, that's ♂ good`)
+          }
+        })
+        .catch((e: unknown) => {
+          logger.error({err: e}, 'gc错误')
+        })
+    }
   }
 
   private async _enable(): Promise<void> {

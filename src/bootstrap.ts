@@ -18,14 +18,20 @@ export async function bootstrap(version: string): Promise<void> {
   logger.info(colors.green(`正在启动 OpenMCIM ${version}`))
   const tokenManager = new TokenManager(config.clusterId, config.clusterSecret, version)
   await tokenManager.getToken()
-  const skipsync = config.skipsync ?? false;// 获取跳过同步布尔值，默认false
   const skipfileshacheck = config.skipfileshacheck ?? false;// 获取跳过文件校验布尔值，默认false
-  const cluster = new Cluster(config.clusterSecret, version, tokenManager, skipfileshacheck, skipsync)
+  const cluster = new Cluster(config.clusterSecret, version, tokenManager, skipfileshacheck)
   await cluster.init()
 
   const storageReady = await cluster.storage.check()
+  if (process.env.FORCE_SKIP_SYNC) {
+    logger.info('已强制跳过存储检查')
+  }
   if (!storageReady) {
-    throw new Error('存储异常')
+    if(process.env.SKIP_SYNC){
+      logger.info('存储异常，已跳过存储检查');
+    }else{
+      throw new Error('存储异常');
+    }
   }
 
   const configuration = await cluster.getConfiguration()
@@ -40,7 +46,11 @@ export async function bootstrap(version: string): Promise<void> {
     throw e
   }
   logger.info('回收文件')
-  cluster.gcBackground(files)
+  if (process.env.SKIP_GC) {
+    logger.info('已跳过文件回收')
+  }else{
+    cluster.gcBackground(files)
+  }
 
   cluster.connect()
   const proto = config.byoc ? 'http' : 'https'
@@ -52,7 +62,7 @@ export async function bootstrap(version: string): Promise<void> {
     if (typeof cluster.port === 'number') {
       await cluster.setupNginx(join(__dirname, '..'), cluster.port, proto)
     } else {
-      throw new Error('cluster.port is not a number')
+      throw new Error('端口号不是一个数字')
     }
   }
   const server = cluster.setupExpress(proto === 'https' && !config.enableNginx)
@@ -62,7 +72,7 @@ export async function bootstrap(version: string): Promise<void> {
     await cluster.listen()
     await cluster.enable()
 
-    logger.info(colors.rainbow(`完成, 正在提供 ${files.files.length} 个文件`))
+    logger.info(colors.rainbow(`启动完成, 正在提供 ${files.files.length} 个文件`))
     if (nodeCluster.isWorker && typeof process.send === 'function') {
       process.send('ready')
     }
@@ -72,7 +82,7 @@ export async function bootstrap(version: string): Promise<void> {
         console.error('检查文件错误')
         console.error(e)
       })
-    }, ms('10m'))
+    }, ms('60m'))
   } catch (e) {
     logger.fatal(e)
     if (process.env.NODE_ENV === 'development') {
@@ -100,7 +110,7 @@ export async function bootstrap(version: string): Promise<void> {
           console.error('检查文件错误')
           console.error(e)
         })
-      }, ms('10m'))
+      }, ms('60m'))
     }
   }
 

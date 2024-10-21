@@ -51,7 +51,7 @@ export class Keepalive {
       this.keepAliveError = 0
     } catch (e) {
       this.keepAliveError++
-      logger.error(e, 'keep alive error')
+      logger.error(e, '保活错误')
       if (this.keepAliveError >= 3) {
         await this.restart()
       }
@@ -74,9 +74,9 @@ export class Keepalive {
       ...counters,
     })) as [object, unknown]
 
-    if (err) throw new Error('keep alive error', {cause: err})
+    if (err) throw new Error('保活错误', {cause: err})
     const bytes = prettyBytes(counters.bytes, {binary: true})
-    if (process.env.SKIP_SYNC) {     
+    if (process.env.FORCE_SKIP_SYNC) {     
     logger.info(`保活成功，上传了 ${counters.hits} 个文件`)
     } else {
     logger.info(`保活成功，上传了 ${counters.hits} 个文件，总共${bytes}`)
@@ -92,7 +92,7 @@ export class Keepalive {
       this.cluster.connect()
       await this.cluster.enable()
     })
-      .timeout(ms('10m'), 'restart timeout')
+      .timeout(ms('10m'), '重启超时')
       .catch((e) => {
         logger.error(e, '重启失败')
         this.cluster.exit(1)
