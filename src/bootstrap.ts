@@ -23,6 +23,9 @@ export async function bootstrap(version: string): Promise<void> {
   await cluster.init()
 
   const storageReady = await cluster.storage.check()
+  if (process.env.SKIP_SYNC) {
+    logger.info('已跳过存储检查，在保活时您将看不到保活的文件大小')
+  }
   if (!storageReady) {
     throw new Error('存储异常');
   }
