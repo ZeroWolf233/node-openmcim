@@ -23,15 +23,8 @@ export async function bootstrap(version: string): Promise<void> {
   await cluster.init()
 
   const storageReady = await cluster.storage.check()
-  if (process.env.FORCE_SKIP_SYNC) {
-    logger.info('已强制跳过存储检查')
-  }
   if (!storageReady) {
-    if(process.env.SKIP_SYNC){
-      logger.info('存储异常，已跳过存储检查');
-    }else{
-      throw new Error('存储异常');
-    }
+    throw new Error('存储异常');
   }
 
   const configuration = await cluster.getConfiguration()
