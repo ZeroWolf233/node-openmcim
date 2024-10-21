@@ -76,7 +76,7 @@ export class Keepalive {
 
     if (err) throw new Error('保活错误', {cause: err})
     const bytes = prettyBytes(counters.bytes, {binary: true})
-    if (process.env.FORCE_SKIP_SYNC) {     
+    if (process.env.SKIP_SYNC) {     
     logger.info(`保活成功，上传了 ${counters.hits} 个文件`)
     } else {
     logger.info(`保活成功，上传了 ${counters.hits} 个文件，总共${bytes}`)
