@@ -31,6 +31,7 @@ OpenMCIM是对外开放的，所有需要 Minecraft Mod 资源的启动器均可
 | SKIP_SYNC | 否  | false          | 强制跳过所有同步(不推荐) |
 | SKIP_GC | 否  | false          | 跳过GC垃圾自动回收(由 **千时雨** 提供) |
 | THREADS | 否  | 由主控分配         | 同步线程(改太高会被banban) |
+| UA | 否  | openmcim-cluster/${version}         | 获取token和同步的UA |
 
 ### 如果你在源码中发现了其他环境变量, 那么它们是为了方便开发而存在的, 可能会随时修改, 不要在生产环境中使用！
 

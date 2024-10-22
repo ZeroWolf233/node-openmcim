@@ -81,7 +81,7 @@ export class Cluster {
     this.host = config.clusterIp
     this._port = config.port
     this.publicPort = config.clusterPublicPort ?? config.port
-    this.ua = `openmcim-cluster/${version}`
+    this.ua = process.env.UA ?? `openmcim-cluster/${version}`
     whiteListDomain.push(this.prefixUrl)
     this.got = got.extend({
       prefixUrl: this.prefixUrl,
@@ -188,7 +188,7 @@ export class Cluster {
     })
     const totalBar = multibar.create(missingFiles.length, 0, {filename: '总文件数'})
     const parallel = Number(process.env.THREADS) ?? syncConfig.concurrency
-    logger.info('您当前的下载线程:' + {parallel})
+    logger.info(`您当前的下载线程: ${parallel} `)
     let hasError = false
     await pMap(
       missingFiles,
