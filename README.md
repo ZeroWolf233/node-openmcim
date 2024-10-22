@@ -138,4 +138,4 @@ CLUSTER_PORT=你的开放端口
 - [**Open93@Home-V3**](https://github.com/SaltWood-Studio/Open93AtHome-V3)
 - [**ZeroWolf233**](https://github.com/ZeroWolf233) 作者，但是fw一个
 - [**Zhang**](https://github.com/Zhang12334) 项目发起 & 程序改写
-- **千时雨** 提供很多对网盘优化的修改思路和代码，虽然暂时还没应用
+- **千时雨** 提供很多对网盘优化的修改思路和代码
