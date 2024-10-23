@@ -187,7 +187,7 @@ export class Cluster {
       notTTYSchedule: ms('10s'),
     })
     const totalBar = multibar.create(missingFiles.length, 0, {filename: '总文件数'})
-    const parallel = Number(process.env.THREADS) ?? syncConfig.concurrency
+    const parallel = Number(process.env.THREADS) || syncConfig.concurrency
     logger.info(`您当前的下载线程: ${parallel} `)
     let hasError = false
     await pMap(
