@@ -302,7 +302,7 @@ export class Cluster {
         const hash = req.params.hash.toLowerCase()
         const signValid = checkSign(hash, this.clusterSecret, req.query as NodeJS.Dict<string>)
         if (!signValid) {
-          return res.status(403).send('invalid sign')
+          return res.status(403).send('错误的sign')
         }
 
         const hashPath = hashToFilename(hash)
