@@ -18,7 +18,7 @@ export class TokenManager {
     this.got = got.extend({
       prefixUrl: this.prefixUrl,
       headers: {
-        'user-agent': process.env.UA ?? 'openmcim-cluster/${version}',
+        'user-agent': process.env.UA ?? `openmcim-cluster/${version}`,
       },
       timeout: {
         request: ms('5m'),
