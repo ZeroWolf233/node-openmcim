@@ -1,6 +1,6 @@
 {
   "name": "openmcim",
-  "version": "1.1.5",
+  "version": "1.1.8",
   "description": "mcim@home",
   "bin": "dist/openmcim.js",
   "private": true,
