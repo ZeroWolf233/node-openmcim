@@ -39,6 +39,7 @@ import type {TokenManager} from './token.js'
 import type {IFileList} from './types.js'
 import {setupUpnp} from './upnp.js'
 import {checkSign, hashToFilename} from './util.js'
+import {isPrivate} from 'ip'
 
 interface ICounters {
   hits: number
@@ -59,7 +60,7 @@ export class Cluster {
   public readonly storage: IStorage
 
   private readonly prefixUrl = process.env.CLUSTER_BMCLAPI ?? 'https://files.mcimirror.top'
-  private readonly host?: string
+  private host?: string
   private _port: number | string
   private readonly publicPort: number
   private readonly ua: string
@@ -135,6 +136,12 @@ export class Cluster {
     await this.storage.init?.()
     if (config.enableUpnp) {
       await setupUpnp(config.port, config.clusterPublicPort)
+      const ip = await setupUpnp(config.port, config.clusterPublicPort)
+      if (isPrivate(ip)) {
+        throw new Error(`不对啊，你这IP(${ip})也不是公网IP啊`)
+      }
+      logger.info(`upnp映射成功，公网IP: ${ip}`)
+      this.host ??= ip
     }
   }
 
