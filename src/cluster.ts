@@ -540,12 +540,12 @@ export class Cluster {
       throw new Error('你的ssl私钥呢？')
     }
     if (await fse.pathExists(config.sslCert)) {
-      await fse.copyFile(config.sslCert, join(this.tmpDir, 'cert.pem'))
+      await fse.copy(config.sslCert, join(this.tmpDir, 'cert.pem'))
     } else {
       await fse.outputFile(join(this.tmpDir, 'cert.pem'), config.sslCert)
     }
     if (await fse.pathExists(config.sslKey)) {
-      await fse.copyFile(config.sslKey, join(this.tmpDir, 'key.pem'))
+      await fse.copy(config.sslKey, join(this.tmpDir, 'key.pem'))
     } else {
       await fse.outputFile(join(this.tmpDir, 'key.pem'), config.sslKey)
     }
