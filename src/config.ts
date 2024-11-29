@@ -23,6 +23,8 @@ export class Config {
   public readonly storage = env.get('CLUSTER_STORAGE').default('file').asString()
   public readonly storageOpts = env.get('CLUSTER_STORAGE_OPTIONS').asJsonObject()
   public readonly flavor: IConfigFlavor
+  public readonly sslKey = env.get('SSL_KEY').asString()
+  public readonly sslCert = env.get('SSL_CERT').asString()
   public readonly skipfileshacheck = env.get('SKIP_FILE_SHA_CHECK').asBool()
   public readonly skipsync = env.get('SKIP_SYNC').asBool()
 

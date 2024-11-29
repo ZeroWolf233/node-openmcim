@@ -39,7 +39,8 @@ import type {TokenManager} from './token.js'
 import type {IFileList} from './types.js'
 import {setupUpnp} from './upnp.js'
 import {checkSign, hashToFilename} from './util.js'
-import {isPrivate} from 'ip'
+import pkg from 'ip';
+const { isPrivate } = pkg;
 
 interface ICounters {
   hits: number
@@ -530,6 +531,25 @@ export class Cluster {
     }
     await fse.outputFile(join(this.tmpDir, 'cert.pem'), cert.cert)
     await fse.outputFile(join(this.tmpDir, 'key.pem'), cert.key)
+  }
+
+  public async useSelfCert(): Promise<void> {
+    if (!config.sslCert) {
+      throw new Error('你的ssl证书呢？')
+    }
+    if (!config.sslKey) {
+      throw new Error('你的ssl私钥呢？')
+    }
+    if (await fse.pathExists(config.sslCert)) {
+      await fse.copyFile(config.sslCert, join(this.tmpDir, 'cert.pem'))
+    } else {
+      await fse.outputFile(join(this.tmpDir, 'cert.pem'), config.sslCert)
+    }
+    if (await fse.pathExists(config.sslKey)) {
+      await fse.copyFile(config.sslKey, join(this.tmpDir, 'key.pem'))
+    } else {
+      await fse.outputFile(join(this.tmpDir, 'key.pem'), config.sslKey)
+    }
   }
 
   public exit(code: number = 0): void {
