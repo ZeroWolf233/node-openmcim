@@ -46,16 +46,20 @@ export async function bootstrap(version: string): Promise<void> {
   }
 
   cluster.connect()
-  const proto = config.byoc ? 'http' : 'https'
-  if (proto === 'https') {
-    if (config.sslCert && config.sslKey) {
-      logger.debug('使用自定义证书')
-      await cluster.useSelfCert()
+  let proto: 'http' | 'https' = 'https'
+  if (config.byoc) {
+    // 当BYOC但是没有提供证书时，使用http
+    if (!config.sslCert || !config.sslKey) {
+      proto = 'http'
     } else {
-      logger.info('请求证书')
-      await cluster.requestCert()
+      logger.info('使用自定义证书')
+      await cluster.useSelfCert()
     }
+  } else {
+    logger.info('请求证书')
+    await cluster.requestCert()
   }
+  
   if (config.enableNginx) {
     if (typeof cluster.port === 'number') {
       await cluster.setupNginx(join(__dirname, '..'), cluster.port, proto)
